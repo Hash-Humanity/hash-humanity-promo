@@ -95,9 +95,29 @@ body{
 /* optional: subtle scanline overlay for vibe */
 .scanlines{ position:fixed; inset:0; z-index:0; pointer-events:none; background-image:repeating-linear-gradient(to bottom, rgba(255,255,255,.02), rgba(255,255,255,.02) 1px, transparent 1px, transparent 3px); mix-blend-mode:soft-light; opacity:.65; }
 
+/* ===== Enhancements: glitch, chips, rain, hover-tilt ===== */
+.glitch{ position:relative; display:inline-block; text-shadow:0 0 0 transparent; }
+.glitch:before,.glitch:after{ content:attr(data-text); position:absolute; left:0; top:0; clip-path:inset(0 0 0 0); opacity:.7; }
+.glitch:before{ transform:translate(2px,0); color:#ffffff20; }
+.glitch:after{ transform:translate(-2px,0); color:#ffffff30; }
+.glitch:hover{ animation:shim .9s steps(2,end) infinite; }
+@keyframes shim{ 0%,100%{ filter:none; } 50%{ filter:hue-rotate(10deg) contrast(110%);} }
+
+.chips{ display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+.chip{ padding:8px 12px; border:1px solid var(--border); border-radius:999px; background:rgba(255,255,255,.04); color:#d8dee9; font-weight:600; letter-spacing:.02em; box-shadow:0 6px 18px rgba(0,0,0,.35); }
+
+.btn{ position:relative; overflow:hidden; }
+.btn:after{ content:""; position:absolute; inset:0; background:linear-gradient(120deg,transparent,rgba(255,255,255,.12),transparent); transform:translateX(-120%); transition:transform .6s; }
+.btn:hover:after{ transform:translateX(120%); }
+
+.rain{ position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.18; mix-blend-mode:soft-light; }
+
+.tilt{ transition: transform .15s ease-out; will-change: transform; }
+
   </style>
 </head>
 <body>
+  <canvas id="rain" class="rain"></canvas>
   <!-- Background globe (pure SVG; lightweight; animated) -->
   <div class="bg">
     <div class="globe" aria-hidden="true">
@@ -129,11 +149,11 @@ body{
             <img src="hh-logo.png" alt="Hash Humanity logo" />
           </div>
           <div>
-            <h1>Hash Humanity</h1>
-            <div class="tag">You are the proof, not the product</div>
+            <h1 class="glitch" data-text="Hash Humanity">Hash Humanity</h1>
+            <div class="tag">You are the proof, not the product • <span id="rotator" data-words="World ID,Zero‑Knowledge,Pulse tipping,Community"></span></div>
           </div>
         </div>
-        <div class="lede glass">
+        <div class="lede glass tilt">
           <p><strong>Human‑verified social.</strong> Log in with <em>World&nbsp;ID</em>, protect your privacy with <em>zero‑knowledge</em> techniques, and tip creators instantly with <em>Pulse</em>. No bots. No data farming. Community first.</p>
           <div class="cta-row">
             <a class="btn" href="https://hashhumanity.world" target="_blank" rel="noopener">↗ Visit the website</a>
@@ -149,6 +169,14 @@ body{
         </div>
       </aside>
     </section><!-- CONTENT GRID -->
+<div class="chips">
+  <div class="chip">World ID login</div>
+  <div class="chip">Zero‑knowledge friendly</div>
+  <div class="chip">Pulse tipping</div>
+  <div class="chip">Human‑only feeds</div>
+  <div class="chip">PWA ready</div>
+</div>
+
 <section class="cols">
   <article class="card glass">
     <h3 class="tick">Vision</h3>
@@ -204,5 +232,45 @@ body{
   </main>  <script>
     // Set year
     document.getElementById('y').textContent = new Date().getFullYear();
+  </script>  <script>
+    // === Matrix-style hash rain (lightweight) ===
+    (function(){
+      const c = document.getElementById('rain'); if(!c) return; const ctx = c.getContext('2d');
+      const k = '0123456789abcdef#'; let w,h,cols,drops; const resize=()=>{ w=c.width=window.innerWidth; h=c.height=window.innerHeight; cols = Math.floor(w/16); drops = Array(cols).fill(0); }; resize();
+      window.addEventListener('resize', resize);
+      function draw(){
+        ctx.fillStyle = 'rgba(0,0,0,0.08)'; ctx.fillRect(0,0,w,h);
+        ctx.fillStyle = 'rgba(255,255,255,0.45)'; ctx.font = '14px ui-monospace,monospace';
+        for(let i=0;i<drops.length;i++){
+          const txt = k[Math.floor(Math.random()*k.length)];
+          ctx.fillText(txt, i*16, drops[i]*16);
+          if(drops[i]*16 > h && Math.random() > 0.975) drops[i]=0; drops[i]++;
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // === Rotating word ticker ===
+    (function(){
+      const el = document.getElementById('rotator'); if(!el) return;
+      const words = (el.dataset.words||'').split(','); let i=0;
+      function tick(){ el.textContent = words[i%words.length].trim(); i++; }
+      tick(); setInterval(tick, 1800);
+    })();
+
+    // === Subtle hover tilt on cards ===
+    (function(){
+      const els = document.querySelectorAll('.tilt, .card.glass');
+      els.forEach(el=>{
+        el.addEventListener('mousemove', (e)=>{
+          const r = el.getBoundingClientRect();
+          const x = (e.clientX - r.left)/r.width - .5;
+          const y = (e.clientY - r.top)/r.height - .5;
+          el.style.transform = `rotateX(${(-y*4).toFixed(2)}deg) rotateY(${(x*4).toFixed(2)}deg)`;
+        });
+        el.addEventListener('mouseleave', ()=>{ el.style.transform = 'none'; });
+      });
+    })();
   </script></body>
 </html>
