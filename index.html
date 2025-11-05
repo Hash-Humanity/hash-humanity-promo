@@ -1,223 +1,208 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hash Humanity — You Are the Proof</title>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hash Humanity — You are the proof</title>
+  <meta name="description" content="Hash Humanity is a human‑verified social network. World ID login, zero‑knowledge privacy, Pulse tipping, and a community built on proof‑of‑humanity." />
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'IBM Plex Mono', monospace;
-      background: #000;
-      color: #f5f5f5;
-      overflow-x: hidden;
-      line-height: 1.6;
-      text-align: center;
-    }
-    #globe-container {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -1;
-      background: #000;
-    }
-    header {
-      padding: 120px 20px 60px;
-    }
-    header h1 {
-      font-size: 2.5em;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: #fff;
-      margin-bottom: 20px;
-      text-shadow: 0 0 8px rgba(255,255,255,0.2);
-    }
-    header p {
-      font-size: 1.2em;
-      color: #ccc;
-      max-width: 800px;
-      margin: 0 auto 40px;
-    }
-    .cta {
-      background: #fff;
-      color: #000;
-      padding: 14px 32px;
-      border-radius: 4px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      display: inline-block;
-    }
-    .cta:hover {
-      background: #999;
-      color: #000;
-      transform: translateY(-2px);
-    }
-    section {
-      padding: 60px 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-    section h2 {
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: #fff;
-      margin-bottom: 20px;
-      font-size: 1.8em;
-      border-bottom: 1px solid #333;
-      display: inline-block;
-      padding-bottom: 5px;
-    }
-    section p {
-      color: #aaa;
-      line-height: 1.7;
-      font-size: 1.05em;
-    }
-    footer {
-      background: #111;
-      padding: 30px;
-      color: #777;
-      font-size: 0.9em;
-    }
-    footer a { color: #fff; text-decoration: none; }
-    /* Scanline overlay */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: repeating-linear-gradient(
-        to bottom,
-        rgba(255,255,255,0.02),
-        rgba(255,255,255,0.02) 1px,
-        transparent 1px,
-        transparent 3px
-      );
-      z-index: 0;
-      pointer-events: none;
-    }
+    /* =============================================
+       HASH HUMANITY — PROMO LANDING (single file)
+       Theme: Cypherpunk / monochrome / glass
+       ============================================= */:root{
+  --ink:#e8eaf0;          /* primary text */
+  --muted:#9aa3ad;        /* secondary text */
+  --bg:#0a0b0d;           /* near-black */
+  --glass:rgba(255,255,255,.06);
+  --border:rgba(255,255,255,.12);
+  --line:rgba(255,255,255,.08);
+  --accent:#ffffff;       /* keep it neutral white */
+  --grid:#1b1f27;         /* globe grid */
+  --shadow-1:0 20px 60px rgba(0,0,0,.65);
+  --radius:22px;
+}
+html,body{height:100%;}
+body{
+  margin:0; background:radial-gradient(1200px 900px at 10% 10%, #121418 0%, #0b0c10 40%, #08090c 100%);
+  color:var(--ink); font: 16px/1.6 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+
+/* ===== Background: rotating wireframe globe ===== */
+.bg{
+  position:fixed; inset:0; pointer-events:none; z-index:0;
+  filter: drop-shadow(0 40px 120px rgba(0,0,0,.8));
+}
+.globe{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  width:min(1200px, 130vmin); aspect-ratio:1/1; opacity:.28;
+}
+.globe svg{ width:100%; height:100%; display:block; }
+.globe .sphere{ fill: none; stroke: var(--grid); stroke-width:1.2; opacity:.85; }
+.globe .mer{ transform-origin:50% 50%; animation: spin 24s linear infinite; }
+.globe .par{ transform-origin:50% 50%; animation: bob 18s ease-in-out infinite; }
+@keyframes spin{ from{ transform: rotate(0deg);} to{ transform: rotate(360deg);} }
+@keyframes bob{ 0%,100%{ transform: rotateX(0deg);} 50%{ transform: rotateX(8deg);} }
+
+/* ===== Layout ===== */
+.wrap{ position:relative; z-index:1; max-width:1100px; margin:0 auto; padding: min(8vh,64px) 20px 80px; }
+
+.hero{
+  display:grid; gap:28px; grid-template-columns: 1.2fr .8fr; align-items:center;
+}
+@media (max-width: 980px){ .hero{ grid-template-columns: 1fr; } }
+
+.brand{
+  display:flex; gap:16px; align-items:center; flex-wrap:wrap;
+}
+.brand .logo{ width:92px; height:92px; border-radius:18px; background:linear-gradient(180deg,#fff,#bbb); filter:grayscale(1); box-shadow:var(--shadow-1); display:grid; place-items:center; overflow:hidden;}
+.brand .logo img{ width:70%; height:auto; filter: invert(0) contrast(1.1) brightness(.8); }
+.brand h1{ margin:0; font-size: clamp(28px, 4.5vw, 48px); letter-spacing:.6px; }
+.tag{ color:var(--muted); font-size:.95rem; letter-spacing:.12em; text-transform:uppercase; }
+
+.glass{
+  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:var(--radius); backdrop-filter: blur(10px) saturate(115%);
+  box-shadow: var(--shadow-1);
+}
+
+.lede{ padding:24px 22px; }
+.lede p{ margin:.6rem 0; }
+
+.cta-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top:14px; }
+.btn{ --bg: #111317; --fg:#fff; appearance:none; border:1px solid var(--border); background:var(--bg); color:var(--fg); padding:12px 18px; border-radius:14px; text-decoration:none; font-weight:700; letter-spacing:.02em; transition:.25s transform, .25s background, .25s border-color, .25s color; display:inline-flex; align-items:center; gap:10px; }
+.btn:hover{ transform:translateY(-1px); border-color:#fff2; }
+.btn.secondary{ --bg: transparent; --fg: var(--ink); background:transparent; color:var(--ink); }
+
+.cols{ display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; margin-top:32px; }
+@media (max-width: 1000px){ .cols{ grid-template-columns: 1fr 1fr; } }
+@media (max-width: 720px){ .cols{ grid-template-columns: 1fr; } }
+
+.card{ padding:18px 18px 16px; position:relative; }
+.card h3{ margin:2px 0 8px; font-size:1.1rem; letter-spacing:.02em; }
+.card p{ margin:.5rem 0; color:var(--muted); }
+.card .mono{ font-family: inherit; font-size:.95rem; color:#d8dee9; }
+.card .rule{ height:1px; background:var(--line); margin:12px 0; border-radius:2px; }
+
+/* small cypherpunk ticks */
+.tick:before{ content:"#"; opacity:.45; margin-right:.4ch; }
+
+/* footer */
+.footer{ margin-top:36px; padding:18px; text-align:center; color:#aab3bd; font-size:.9rem; }
+
+/* optional: subtle scanline overlay for vibe */
+.scanlines{ position:fixed; inset:0; z-index:0; pointer-events:none; background-image:repeating-linear-gradient(to bottom, rgba(255,255,255,.02), rgba(255,255,255,.02) 1px, transparent 1px, transparent 3px); mix-blend-mode:soft-light; opacity:.65; }
+
   </style>
 </head>
 <body>
-  <div id="globe-container"></div>
+  <!-- Background globe (pure SVG; lightweight; animated) -->
+  <div class="bg">
+    <div class="globe" aria-hidden="true">
+      <svg viewBox="0 0 100 100" role="img" aria-label="Wireframe globe">
+        <!-- outer circle -->
+        <circle class="sphere" cx="50" cy="50" r="48" />
+        <!-- meridians -->
+        <g class="mer">
+          <ellipse class="sphere" cx="50" cy="50" rx="44" ry="48" />
+          <ellipse class="sphere" cx="50" cy="50" rx="30" ry="48" />
+          <ellipse class="sphere" cx="50" cy="50" rx="15" ry="48" />
+        </g>
+        <!-- parallels -->
+        <g class="par">
+          <ellipse class="sphere" cx="50" cy="50" rx="48" ry="44" />
+          <ellipse class="sphere" cx="50" cy="50" rx="48" ry="30" />
+          <ellipse class="sphere" cx="50" cy="50" rx="48" ry="15" />
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div class="scanlines" aria-hidden="true"></div>  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <div class="brand">
+          <div class="logo" aria-hidden="true">
+            <!-- If you have a white key‑out logo, drop it here -->
+            <img src="/icon-192.png" alt="Hash Humanity" />
+          </div>
+          <div>
+            <h1>Hash Humanity</h1>
+            <div class="tag">You are the proof, not the product</div>
+          </div>
+        </div>
+        <div class="lede glass">
+          <p><strong>Human‑verified social.</strong> Log in with <em>World&nbsp;ID</em>, protect your privacy with <em>zero‑knowledge</em> techniques, and tip creators instantly with <em>Pulse</em>. No bots. No data farming. Community first.</p>
+          <div class="cta-row">
+            <a class="btn" href="https://hashhumanity.world" target="_blank" rel="noopener">↗ Visit the website</a>
+            <a class="btn secondary" href="mailto:support@hashhumanity.world">✉ Email support</a>
+          </div>
+        </div>
+      </div>
+      <aside class="glass" style="padding:18px 18px 6px">
+        <div class="card" style="background:transparent">
+          <h3>Quick facts</h3>
+          <div class="rule"></div>
+          <p class="mono">• Sign‑in: World ID (proof‑of‑humanity)<br/>• Privacy: zero‑knowledge‑friendly by design<br/>• Value: Pulse tipping for creators & causes<br/>• Culture: cypherpunk ethics, open dialogue</p>
+        </div>
+      </aside>
+    </section><!-- CONTENT GRID -->
+<section class="cols">
+  <article class="card glass">
+    <h3 class="tick">Vision</h3>
+    <p>A web where <em>humans</em> own their voice and value. Identity is verified without surrendering your private life. Platforms serve people — not ad markets.</p>
+  </article>
 
-  <header>
-    <h1>You Are Not the Product. You Are the Proof.</h1>
-    <p>
-      Hash Humanity is a World ID–only social platform with a strict no-bots, no-burners, no-BS door policy.
-      If you’re not verified human, you’re not getting in. That single rule changes everything.
-    </p>
-    <a href="https://hashhumanity.world" class="cta">Join Hash Humanity</a>
-  </header>
+  <article class="card glass">
+    <h3 class="tick">Mission</h3>
+    <p>Build the most trusted human‑only social layer on the internet by combining proof‑of‑personhood, privacy‑preserving tech, and community governance.</p>
+  </article>
 
-  <section>
-    <h2>Signal, Not Spam</h2>
-    <p>
-      Every feed is signal, not noise. No fake accounts, no bot swarms, no algorithmic sludge.
-      Just real people, verified by World ID, sharing ideas that matter.
-    </p>
-  </section>
+  <article class="card glass">
+    <h3 class="tick">What we are</h3>
+    <p>Hash Humanity is a <strong>human‑verified social network</strong>. Every account is backed by World&nbsp;ID, dramatically reducing bots, spam, and brigading.</p>
+  </article>
 
-  <section>
-    <h2>Pulse: Money for Ideas</h2>
-    <p>
-      With Pulse, you can drop Worldcoin micro-rewards directly on content that moves you.
-      Every Pulse is real value from one verified human to another. Sharp thinking earns, low-effort sludge dies.
-      Pulse creates a merit economy where the best ideas rise because people back them with value.
-    </p>
-  </section>
+  <article class="card glass">
+    <h3 class="tick">Goals</h3>
+    <p>Humane feeds, transparent rules, creator sustainability, and zero‑tolerance for mass manipulation. Ship fast, break <em>nothing</em>, and earn trust daily.</p>
+  </article>
 
-  <section>
-    <h2>Proof-of-Personhood</h2>
-    <p>
-      World ID provides private, cryptographic proof-of-personhood. We don’t store biometrics, we don’t play creepy KYC games.
-      One person = one account. Every reply, follow, and Pulse happens between humans you can trust are real.
-    </p>
-  </section>
+  <article class="card glass">
+    <h3 class="tick">Website</h3>
+    <p>Fast, mobile‑first, and PWA‑ready for push notifications. Thoughtful design in black / white / gray — no dark‑pattern bullshit.</p>
+  </article>
 
-  <section>
-    <h2>Culture & Beta</h2>
-    <p>
-      We’re in beta and pushing fast. The rails are solid, the features are live, and the culture is simple:
-      bring your brain, get rewarded, and Pulse the hell out of what deserves it.
-      Hash Humanity is where intelligent conversation meets instant incentive.
-    </p>
-  </section>
+  <article class="card glass">
+    <h3 class="tick">Pulse tipping</h3>
+    <p>Frictionless micro‑tipping to fuel creators and mutual aid. Small pulses, big impact. Native, instant, and trackable — without exposing your identity.</p>
+  </article>
 
-  <section>
-    <h2>Contact</h2>
-    <p>
-      We’re building this together. For questions, partnerships, or support, email us at
-      <a href="mailto:support@hashhumanity.world">support@hashhumanity.world</a>.
-    </p>
-  </section>
+  <article class="card glass">
+    <h3 class="tick">World ID</h3>
+    <p>One‑tap sign‑in powered by verified personhood. We use World&nbsp;ID to cut bots and fake accounts while keeping your personal info off our servers.</p>
+  </article>
 
-  <footer>
-    <p>© 2025 Hash Humanity — You Are the Proof.</p>
-  </footer>
+  <article class="card glass">
+    <h3 class="tick">Zero‑knowledge</h3>
+    <p>Privacy isn’t a feature — it’s architecture. Zero‑knowledge proof‑friendly flows let you prove statements about yourself without revealing the raw data.</p>
+  </article>
 
-  <!-- Three.js Detailed Globe -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script>
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
-      75, window.innerWidth / window.innerHeight, 0.1, 1000
-    );
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.getElementById("globe-container").appendChild(renderer.domElement);
+  <article class="card glass">
+    <h3 class="tick">Community</h3>
+    <p>Moderation with receipts. Clear rules, appeals, and community‑driven standards. We amplify real people, not engagement bait.</p>
+  </article>
+</section>
 
-    // Detailed wireframe globe
-    const globeGeometry = new THREE.SphereGeometry(5, 96, 96);
-    const globeMaterial = new THREE.MeshBasicMaterial({
-      color: 0xffffff,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.12
-    });
-    const globe = new THREE.Mesh(globeGeometry, globeMaterial);
-    scene.add(globe);
+<footer class="footer">
+  © <span id="y"></span> Hash Humanity • <a href="https://hashhumanity.world" target="_blank" rel="noopener" style="color:#dfe6ee; text-decoration:none;">hashhumanity.world</a>
+  • <a href="mailto:support@hashhumanity.world" style="color:#dfe6ee; text-decoration:none;">support@hashhumanity.world</a>
+</footer>
 
-    // Orbit rings
-    const ringMaterial = new THREE.LineBasicMaterial({ color: 0x888888, transparent: true, opacity: 0.2 });
-    for (let i = 1; i <= 3; i++) {
-      const ringGeometry = new THREE.RingGeometry(5.5 * i, 5.5 * i + 0.01, 128);
-      const ring = new THREE.LineLoop(ringGeometry, ringMaterial);
-      ring.rotation.x = Math.PI / 2;
-      scene.add(ring);
-    }
-
-    // Nodes
-    const nodeGeometry = new THREE.SphereGeometry(0.05, 8, 8);
-    const nodeMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
-    for (let i = 0; i < 50; i++) {
-      const node = new THREE.Mesh(nodeGeometry, nodeMaterial);
-      const phi = Math.acos(2 * Math.random() - 1);
-      const theta = 2 * Math.PI * Math.random();
-      node.position.set(
-        5 * Math.sin(phi) * Math.cos(theta),
-        5 * Math.sin(phi) * Math.sin(theta),
-        5 * Math.cos(phi)
-      );
-      scene.add(node);
-    }
-
-    camera.position.z = 15;
-
-    function animate() {
-      requestAnimationFrame(animate);
-      globe.rotation.y += 0.001;
-      scene.rotation.y += 0.0005;
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-  </script>
-</body>
+  </main>  <script>
+    // Set year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script></body>
 </html>
