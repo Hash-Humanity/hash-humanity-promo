@@ -3,114 +3,166 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hash Humanity</title>
+  <title>Hash Humanity — You Are the Proof</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      line-height: 1.6;
-      background: #f9f9f9;
-      color: #222;
+      font-family: 'IBM Plex Mono', monospace;
+      background: #000;
+      color: #f5f5f5;
+      text-align: center;
+      overflow-x: hidden;
+    }
+    #globe-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      background: #000;
     }
     header {
-      background: #111;
-      color: #fff;
-      padding: 60px 20px;
-      text-align: center;
+      padding: 120px 20px 60px;
     }
     header h1 {
       font-size: 2.5em;
-      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #fff;
+      margin-bottom: 20px;
     }
     header p {
       font-size: 1.2em;
-      margin-bottom: 20px;
+      color: #ccc;
+      max-width: 800px;
+      margin: 0 auto 40px;
     }
-    header a {
-      background: #00bcd4;
-      color: #fff;
-      padding: 12px 24px;
-      text-decoration: none;
-      border-radius: 6px;
+    .cta {
+      background: #fff;
+      color: #000;
+      padding: 14px 32px;
+      border-radius: 4px;
       font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .cta:hover {
+      background: #999;
+      color: #000;
     }
     section {
       padding: 60px 20px;
       max-width: 900px;
       margin: auto;
     }
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+    section h2 {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #fff;
+      margin-bottom: 20px;
     }
-    .feature {
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    section p {
+      color: #aaa;
+      line-height: 1.6;
     }
     footer {
       background: #111;
+      padding: 30px;
+      color: #777;
+      font-size: 0.9em;
+    }
+    footer a {
       color: #fff;
-      text-align: center;
-      padding: 30px 20px;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
+  <div id="globe-container"></div>
+
   <header>
     <h1>You Are Not the Product. You Are the Proof.</h1>
-    <p>A human-only social network verified by World ID. No bots. No fakes. Just people.</p>
-    <a href="#join">Join Hash Humanity</a>
+    <p>
+      Hash Humanity is a World ID–only social platform with a strict no-bots, no-burners, no-BS door policy.
+      If you’re not verified human, you’re not getting in. That single rule changes everything.
+    </p>
+    <a href="https://hashhumanity.world" class="cta">Join Hash Humanity</a>
   </header>
 
   <section>
-    <h2>Why Hash Humanity?</h2>
+    <h2>Signal, Not Spam</h2>
     <p>
-      Traditional social media is overrun with bots, spam, and fake accounts. 
-      Hash Humanity changes that by using <strong>World ID</strong> as the only verification method, 
-      ensuring every interaction is authentically human.
+      Every feed is signal, not noise. No fake accounts, no bot swarms, no algorithmic sludge.
+      Just real people, verified by World ID, sharing ideas that matter.
     </p>
   </section>
 
   <section>
-    <h2>Core Features</h2>
-    <div class="features">
-      <div class="feature">
-        <h3>✅ Human-Only Verification</h3>
-        <p>World ID ensures authenticity — every user is real.</p>
-      </div>
-      <div class="feature">
-        <h3>💬 Real Conversations</h3>
-        <p>Messaging, discussions, and personal profiles built for humans.</p>
-      </div>
-      <div class="feature">
-        <h3>🕶️ Privacy by Choice</h3>
-        <p>Be yourself or remain anonymous — you decide.</p>
-      </div>
-      <div class="feature">
-        <h3>⚡ Pulse Tips</h3>
-        <p>Reward content you love with Worldcoin micro-tips.</p>
-      </div>
-      <div class="feature">
-        <h3>🌐 Built for Speed</h3>
-        <p>Powered by Firebase, Vite, Node.js, and React for a seamless experience.</p>
-      </div>
-    </div>
+    <h2>Pulse: Money for Ideas</h2>
+    <p>
+      With Pulse, you can drop Worldcoin micro-rewards directly on content that moves you.
+      Every Pulse is real value from one verified human to another. Sharp thinking earns, low-effort sludge dies.
+      Pulse creates a merit economy where the best ideas rise because people back them with value.
+    </p>
   </section>
 
   <section>
-    <h2>Our Vision</h2>
+    <h2>Proof-of-Personhood</h2>
     <p>
-      We’re building a digital commons where humanity thrives without bots, spam, or manipulation. 
-      Every connection is genuine, every reward is meaningful, and every member is proof of humanity.
+      World ID provides private, cryptographic proof-of-personhood. We don’t store biometrics, we don’t play creepy KYC games.
+      One person = one account. Every reply, follow, and Pulse happens between humans you can trust are real.
+    </p>
+  </section>
+
+  <section>
+    <h2>Culture & Beta</h2>
+    <p>
+      We’re in beta and pushing fast. The rails are solid, the features are live, and the culture is simple:
+      bring your brain, get rewarded, and Pulse the hell out of what deserves it.
+      Hash Humanity is where intelligent conversation meets instant incentive.
+    </p>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <p>
+      We’re building this together. For questions, partnerships, or support, email us at
+      <a href="mailto:support@hashhumanity.world">support@hashhumanity.world</a>.
     </p>
   </section>
 
   <footer>
-    <p>Hash Humanity — You Are Not the Product. You Are the Proof.</p>
-    <p id="join"><a href="https://your-app-link.com" style="color:#00bcd4;">Join Now</a></p>
+    <p>© 2025 Hash Humanity — You Are the Proof.</p>
   </footer>
+
+  <!-- Three.js Globe -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.getElementById("globe-container").appendChild(renderer.domElement);
+
+    const geometry = new THREE.SphereGeometry(5, 32, 32);
+    const material = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true });
+    const globe = new THREE.Mesh(geometry, material);
+    scene.add(globe);
+
+    camera.position.z = 12;
+
+    function animate() {
+      requestAnimationFrame(animate);
+      globe.rotation.y += 0.002;
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
 </body>
 </html>
