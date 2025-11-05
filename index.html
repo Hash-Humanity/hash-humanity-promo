@@ -183,6 +183,18 @@ body{
   .cta-sticky .btn{ flex:1; }
 }
 
+/* ===== Mobile polish & no-fake-stats overrides ===== */
+@media (max-width: 720px){
+  .intro{ display:none !important; }
+  .hero{ grid-template-columns:1fr !important; gap:18px !important; }
+  .wrap{ padding:18px 14px 88px !important; }
+  .orb{ width:68vmin !important; }
+  .cta-row{ flex-direction:column !important; }
+  .btn{ width:100% !important; padding:14px 16px !important; font-size:1rem !important; border-radius:12px !important; }
+  .globe{ opacity:.18 !important; }
+}
+.stats{ display:none !important; }
+
   </style>
 </head>
 <body>
@@ -397,6 +409,26 @@ body{
       const mq = window.matchMedia('(max-width: 720px)');
       function toggle(){ if(mq.matches) document.body.appendChild(bar); else bar.remove(); }
       mq.addEventListener('change', toggle); toggle();
+    })();
+  </script>  <script>
+    // Remove any stat counters entirely (user doesn't want placeholder numbers)
+    (function(){
+      document.querySelectorAll('.stats').forEach(n=>n.remove());
+      // If a counter script exists, neutralize by removing references
+      const scripts = Array.from(document.scripts);
+      scripts.forEach(s=>{ if(s.textContent && s.textContent.includes(".stat .num")){ /* noop: present but harmless */ } });
+    })();
+
+    // Ensure sticky CTA shows only primary button on mobile
+    (function(){
+      const mq = matchMedia('(max-width: 720px)');
+      function tweak(){
+        const bar = document.querySelector('.cta-sticky');
+        if(!bar) return;
+        const primary = '<a class="btn primary" href="https://hashhumanity.world" target="_blank" rel="noopener">Verify with World ID</a>';
+        bar.innerHTML = primary;
+      }
+      mq.addEventListener('change', tweak); tweak();
     })();
   </script></body>
 </html>
