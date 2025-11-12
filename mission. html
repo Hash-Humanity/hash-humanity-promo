@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hash Humanity — Mission & Vision</title>
+<link rel="icon" href="logo.png" />
+<meta name="description" content="Hash Humanity — mission, who we are, why we exist, and the bigger picture." />
+<style>
+  :root{
+    --bg:#000; --ink:#fff; --muted:#bfbfbf;
+    --glass:rgba(255,255,255,0.06);
+    --glass-strong:rgba(255,255,255,0.12);
+    --ring:rgba(255,255,255,0.25);
+    --radius:18px;
+    --shadow:0 20px 60px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.06);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background: radial-gradient(900px 540px at 50% -10%, #222 0%, #0d0d0d 35%, #000 70%) #000;
+    color:var(--ink); font:16px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  }
+  .wrap{max-width:980px; margin:0 auto; padding:28px 20px 80px}
+  header{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:10px 0 18px}
+  .brand{display:flex; align-items:center; gap:12px}
+  .brand img{width:36px; height:36px; border-radius:999px}
+  .actions{display:flex; gap:10px}
+  .btn{
+    appearance:none; border:1px solid var(--ring); color:#fff; background:var(--glass);
+    padding:10px 16px; border-radius:999px; font-weight:600; letter-spacing:.02em;
+    backdrop-filter: blur(8px) saturate(120%); box-shadow:var(--shadow);
+    text-decoration:none; display:inline-flex; align-items:center; gap:10px;
+  }
+  .btn.primary{ background:#fff; color:#000; border-color:#fff }
+  h1{font-size: clamp(30px, 4.6vw, 52px); line-height:1.05; margin:6px 0 10px}
+  .lead{color:var(--muted); font-size:18px; margin:0 0 28px}
+
+  .grid{display:grid; grid-template-columns:1fr; gap:16px}
+  .card{
+    background:var(--glass); border:1px solid var(--ring); border-radius:var(--radius);
+    padding:22px; box-shadow:var(--shadow);
+  }
+  .card h2{margin:0 0 10px; font-size:22px}
+  .card p{margin:0 0 8px; color:#d6d6d6}
+  .muted{color:var(--muted)}
+  footer{opacity:.7; font-size:13px; padding:22px 0 40px}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <img src="logo.png" alt="Hash Humanity" />
+        <strong>HASH HUMANITY</strong>
+      </div>
+      <nav class="actions">
+        <a class="btn" href="promo.html">← Back</a>
+        <a class="btn primary" href="https://hashhumanity.world" target="_blank" rel="noopener">Open App</a>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Mission &amp; Vision</h1>
+      <p class="lead">We’re building a human-verified social network where people — not bots, not click-farms, not rage-bait — set the tone.</p>
+
+      <section class="grid">
+        <article class="card">
+          <h2>Our Mission</h2>
+          <p>Make social spaces trustworthy again by ensuring every account is a real human via World ID (device or orb). With identity handled privately, we can focus on what matters: conversation, creation, and community.</p>
+        </article>
+
+        <article class="card">
+          <h2>Who We Are</h2>
+          <p>Builders and pragmatists. We ship fast, keep it minimal, and cut the bullshit. Hash Humanity is black-and-white by design — a clean, reliable place for verified people.</p>
+        </article>
+
+        <article class="card">
+          <h2>Why We’re Doing This</h2>
+          <p>Open social got wrecked by bots, spam, and incentives that reward outrage. Verification at the door lets us remove the bot problem without turning the product into an ad machine.</p>
+        </article>
+
+        <article class="card">
+          <h2>The Bigger Picture</h2>
+          <p>We’re laying the groundwork for a network where creators get paid directly (Pulse tipping, WLD), language barriers are optional (built-in translation), and data extraction isn’t the business model.</p>
+          <p class="muted">No dark patterns. No fake metrics. Just people talking — and tipping — in the open.</p>
+        </article>
+
+        <article class="card">
+          <h2>How It Works</h2>
+          <p><strong>1) Verify with World ID</strong> — Prove you’re human (no PII shared with us).<br/>
+             <strong>2) Join the feed</strong> — Post, translate, react.<br/>
+             <strong>3) Tip with Pulse</strong> — WLD micro-tips via World App (mobile deep-links) or desktop WalletConnect.</p>
+        </article>
+
+        <article class="card">
+          <h2>What’s Next</h2>
+          <p>Device-first onboarding, better internationalization, creator tools, and open export APIs so you can take your content with you.</p>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="y"></span> Hash Humanity — “You are the proof, not the product.”
+    </footer>
+  </div>
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
