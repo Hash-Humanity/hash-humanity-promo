@@ -38,11 +38,6 @@
 
   /* ---------- HEADER ---------- */
 
-  header > .wrap{
-    padding-left:8px;   /* reduced side padding */
-    padding-right:24px;
-  }
-
   header{
     position:sticky;
     top:0;
@@ -50,18 +45,24 @@
     height:var(--headerH);
     display:flex;
     align-items:center;
-    justify-content:space-between;
-    gap:16px;
     backdrop-filter:saturate(150%) blur(14px);
     background:linear-gradient(180deg, rgba(0,0,0,.94), rgba(0,0,0,.4), rgba(0,0,0,0));
     border-bottom:1px solid rgba(255,255,255,.06);
   }
 
+  header > .wrap{
+    padding-left:12px;  /* bring brand closer to left edge */
+    padding-right:24px;
+  }
+
   .header-inner{
     display:flex;
     align-items:center;
-    justify-content:space-between;
     gap:16px;
+  }
+
+  .header-spacer{
+    flex:1; /* pushes buttons all the way to the right */
   }
 
   .brand{
@@ -69,7 +70,7 @@
     align-items:center;
     gap:14px;
     position:relative;
-    margin-left:-18px; /* PUSH BRAND FURTHER LEFT ON DESKTOP */
+    margin-left:0; /* keep logo clean against left padding */
   }
 
   .brand::after{
@@ -90,7 +91,7 @@
     border-radius:16px;
     object-fit:cover;
     box-shadow:0 10px 30px rgba(0,0,0,.9);
-    background:#111; /* fallback so the box is visible even if logo.png fails */
+    background:#111; /* fallback so box is visible even if logo.png fails */
     display:block;
   }
 
@@ -99,7 +100,7 @@
     font-weight:900;
     letter-spacing:.20em;
     text-transform:uppercase;
-    font-size:clamp(20px, 2.4vw, var(--brandMax)); /* smaller wordmark */
+    font-size:clamp(20px, 2.4vw, var(--brandMax));
     line-height:1.02;
     text-shadow:0 0 16px rgba(255,255,255,.28);
     white-space:nowrap;
@@ -427,13 +428,13 @@
     }
 
     .header-inner{
-      flex-direction:column;          /* brand on top, nav under it */
+      flex-direction:column;      /* brand on top, buttons under */
       align-items:flex-start;
       gap:10px;
     }
 
-    .brand{
-      margin-left:0;                  /* reset on mobile so it doesn't hang off-screen */
+    .header-spacer{
+      display:none;              /* no spacer on mobile */
     }
 
     .brand img{
@@ -454,7 +455,7 @@
     .actions{
       gap:8px;
       flex-wrap:wrap;
-      justify-content:flex-start;     /* buttons left-aligned under logo/text */
+      justify-content:flex-start;
     }
 
     .btn{
@@ -494,6 +495,7 @@
       <img src="logo.png" alt="Hash Humanity logo" />
       <span>HASH&nbsp;HUMANITY</span>
     </div>
+    <div class="header-spacer"></div>
     <nav class="actions">
       <a class="btn primary" href="https://hashhumanity.world" target="_blank" rel="noopener">Open App</a>
       <a class="btn" href="mission.html">Learn More</a>
