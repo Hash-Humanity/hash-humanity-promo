@@ -7,7 +7,6 @@
 <meta name="description" content="A human-verified social network powered by World ID. No bots. No spam. Pulse tipping built-in." />
 <link rel="icon" href="logo.png" />
 
-<!-- Clean, modern font only -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
 <style>
@@ -39,8 +38,6 @@
     padding:0 28px;
   }
 
-  /* ---------- HEADER ---------- */
-
   header{
     position:sticky;
     top:0;
@@ -54,20 +51,18 @@
   }
 
   header > .wrap{
-    padding-left:8px;   /* brand closer to the left */
+    padding-left:8px;
     padding-right:24px;
   }
 
   .header-inner{
     display:flex;
     align-items:center;
-    justify-content:space-between; /* brand left, buttons right */
+    justify-content:space-between;
     gap:24px;
   }
 
-  .header-spacer{
-    display:none;
-  }
+  .header-spacer{display:none}
 
   .brand{
     display:flex;
@@ -164,8 +159,6 @@
     box-shadow:0 32px 100px rgba(255,255,255,.14), inset 0 0 0 1px rgba(0,0,0,.1);
   }
 
-  /* ---------- HERO ---------- */
-
   section{scroll-margin-top:calc(var(--headerH) + 16px)}
 
   .hero{
@@ -236,11 +229,7 @@
     margin-top:4px;
   }
 
-  .hero .actions .btn{
-    padding-inline:20px;
-  }
-
-  /* ---------- DEVICE SIDE ---------- */
+  .hero .actions .btn{ padding-inline:20px; }
 
   .device-orbit{
     position:relative;
@@ -308,29 +297,6 @@
     box-shadow:0 0 0 1px rgba(255,255,255,.1) inset;
   }
 
-  .device:after{
-    content:"";
-    position:absolute;
-    inset:0;
-    border-radius:40px;
-    pointer-events:none;
-    box-shadow:
-      0 1px 0 rgba(255,255,255,.25) inset,
-      0 -1px 0 rgba(255,255,255,.06) inset;
-  }
-
-  @media (max-width:780px){
-    .device{
-      transform:perspective(900px) rotateY(-11deg) rotateX(3deg) translateY(4px);
-      margin-top:8px;
-    }
-    .device-orbit::before{
-      inset:12% 12%;
-    }
-  }
-
-  /* ---------- GRID CARDS ---------- */
-
   .grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -339,10 +305,7 @@
   }
 
   @media (max-width:980px){
-    .grid{
-      grid-template-columns:1fr;
-      margin:42px 0 38px;
-    }
+    .grid{ grid-template-columns:1fr; margin:42px 0 38px; }
   }
 
   .card{
@@ -353,19 +316,8 @@
     box-shadow:var(--shadow);
   }
 
-  .card h3{
-    margin:0 0 8px;
-    font-weight:700;
-    font-size:20px;
-    line-height:1.2;
-  }
-
-  .card p{
-    margin:0;
-    color:var(--muted);
-  }
-
-  /* ---------- CTA STRIP ---------- */
+  .card h3{ margin:0 0 8px; font-weight:700; font-size:20px; line-height:1.2; }
+  .card p{ margin:0; color:var(--muted); }
 
   .cta{
     margin:18px 0 26px;
@@ -390,41 +342,15 @@
     object-fit:contain;
   }
 
-  .cta .txt{
-    flex:1 1 320px;
-    min-width:0;
-  }
+  .cta .txt{ flex:1 1 320px; min-width:0; }
+  .cta h2{ margin:0 0 6px; font-weight:800; font-size:26px; line-height:1.2; }
+  .cta p{ margin:0; color:var(--muted); }
+  .cta .actions{ flex-shrink:0; }
 
-  .cta h2{
-    margin:0 0 6px;
-    font-weight:800;
-    font-size:26px;
-    line-height:1.2;
-  }
+  footer{ opacity:.78; font-size:13px; padding:22px 0 70px; }
+  .fine{ color:var(--muted); }
 
-  .cta p{
-    margin:0;
-    color:var(--muted);
-  }
-
-  .cta .actions{
-    flex-shrink:0;
-  }
-
-  /* ---------- FOOTER ---------- */
-
-  footer{
-    opacity:.78;
-    font-size:13px;
-    padding:22px 0 70px;
-  }
-
-  .fine{
-    color:var(--muted);
-  }
-
-  /* ---------- AUDIO UI ---------- */
-
+  /* AUDIO UI */
   .audio-gate{
     position:fixed;
     left:12px;
@@ -434,7 +360,6 @@
     display:none;
     align-items:center;
     justify-content:center;
-    gap:10px;
   }
 
   .audio-btn{
@@ -472,86 +397,27 @@
     font-size:11px;
   }
 
-  /* ---------- RESPONSIVE ---------- */
-
   @media (max-width:720px){
     :root{ --brandMax:28px }
-
-    header{
-      height:auto;
-      padding:10px 0 8px;
-    }
-
-    header > .wrap{
-      padding-left:14px;
-      padding-right:16px;
-    }
-
-    .header-inner{
-      flex-direction:column;
-      align-items:stretch;
-      gap:10px;
-      justify-content:flex-start;
-    }
-
-    .brand img{
-      width:52px;
-      height:52px;
-      border-radius:14px;
-    }
-
-    .brand span{
-      letter-spacing:.18em;
-      font-size:20px;
-      text-shadow:0 0 14px rgba(255,255,255,.3);
-    }
-
-    .brand::after{
-      display:none;
-    }
-
-    .actions{
-      width:100%;
-      justify-content:flex-end;
-    }
-
-    .actions .btn{
-      flex:0 1 auto;
-      font-size:11px;
-      padding:9px 14px;
-      min-width:110px;
-    }
-
-    .hero{
-      padding-top:26px;
-    }
-
-    .lead{
-      max-width:none;
-    }
-
-    .cta{
-      flex-direction:column;
-      align-items:flex-start;
-    }
-
-    .cta img{
-      width:130px;
-      height:130px;
-    }
-
-    .cta .actions{
-      width:100%;
-      justify-content:flex-start;
-    }
+    header{ height:auto; padding:10px 0 8px; }
+    header > .wrap{ padding-left:14px; padding-right:16px; }
+    .header-inner{ flex-direction:column; align-items:stretch; gap:10px; justify-content:flex-start; }
+    .brand::after{ display:none; }
+    .actions{ width:100%; justify-content:flex-end; }
+    .actions .btn{ font-size:11px; padding:9px 14px; min-width:110px; }
+    .hero{ padding-top:26px; }
+    .cta{ flex-direction:column; align-items:flex-start; }
+    .cta img{ width:130px; height:130px; }
+    .cta .actions{ width:100%; justify-content:flex-start; }
   }
 </style>
 </head>
 <body>
 
-<!-- 🔊 AUDIO: change this path to where your mp3 actually lives -->
-<audio id="hh-audio" preload="auto">
-<source src="intro.mp3" type="audio/mpeg" /></audio>
+<!-- ✅ Correct URL for a file located at public/intro.mp3 -->
+<audio id="hh-audio" preload="auto" playsinline>
+  <source src="/intro.mp3" type="audio/mpeg" />
+</audio>
 
 <div class="audio-gate" id="audioGate">
   <button class="audio-btn" id="audioStartBtn" type="button">Tap to enable audio</button>
@@ -661,50 +527,67 @@
     const startBtn = document.getElementById("audioStartBtn");
     const toggle = document.getElementById("audioToggle");
 
-    // tweak these
     a.volume = 0.65;
     a.loop = false;
+    a.muted = false;
 
-    async function attemptAutoplay() {
+    function showGate(msg) {
+      gate.style.display = "flex";
+      toggle.style.display = "none";
+      if (msg) startBtn.textContent = msg;
+    }
+
+    function hideGate() {
+      gate.style.display = "none";
+    }
+
+    function showToggle() {
+      toggle.style.display = "inline-flex";
+      toggle.textContent = a.paused ? "Audio: Off" : "Audio: On";
+    }
+
+    async function tryAutoplay() {
       try {
-        // Some browsers need a tiny delay after load
         await a.play();
-        gate.style.display = "none";
-        toggle.style.display = "inline-flex";
-        toggle.textContent = "Audio: On";
+        hideGate();
+        showToggle();
       } catch (e) {
-        // Autoplay blocked: show tap gate
-        gate.style.display = "flex";
-        toggle.style.display = "none";
+        // Mobile autoplay blocked — expected
+        showGate("Tap to enable audio");
       }
     }
 
     startBtn.addEventListener("click", async () => {
       try {
+        // user gesture -> should succeed on mobile
+        a.currentTime = 0;
         await a.play();
-        gate.style.display = "none";
-        toggle.style.display = "inline-flex";
-        toggle.textContent = "Audio: On";
+        hideGate();
+        showToggle();
       } catch (e) {
-        // If it still fails, leave gate up
-        gate.style.display = "flex";
+        showGate("Tap to enable audio");
       }
     });
 
-    toggle.addEventListener("click", () => {
+    toggle.addEventListener("click", async () => {
       if (a.paused) {
-        a.play().then(() => {
-          toggle.textContent = "Audio: On";
-        }).catch(() => {});
+        try {
+          await a.play();
+        } catch {}
       } else {
         a.pause();
-        toggle.textContent = "Audio: Off";
       }
+      showToggle();
     });
 
-    // Try on load
+    // If the file path is wrong, you'll see it
+    a.addEventListener("error", () => {
+      console.error("Audio failed to load. Check that /intro.mp3 exists on the deployed site.");
+      showGate("Audio file not found (/intro.mp3). Fix path, then refresh.");
+    });
+
     window.addEventListener("load", () => {
-      setTimeout(attemptAutoplay, 30);
+      setTimeout(tryAutoplay, 50);
     });
   })();
 </script>
