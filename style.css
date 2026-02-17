@@ -473,3 +473,49 @@ body{
     radial-gradient(900px 520px at 12% 18%, rgba(0,0,0,.05), transparent 58%),
     linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
 }
+/* ===== FORCE LIGHT MODE (put this at the END of your CSS) ===== */
+:root{ color-scheme: light; }
+
+html, body{
+  background: #ffffff !important;
+  color: #0b0b0c !important;
+}
+
+body{
+  /* kill any gradients/images set earlier */
+  background-image: none !important;
+  background-color: #ffffff !important;
+}
+
+/* make your glass + borders look right on white */
+:root{
+  --ink:#0b0b0c;
+  --muted: rgba(10,10,12,.72);
+  --muted2: rgba(10,10,12,.56);
+
+  --glass: rgba(255,255,255,.78);
+  --glass2: rgba(255,255,255,.90);
+  --glass3: rgba(255,255,255,.96);
+
+  --hair: rgba(10,10,12,.12);
+  --ring: rgba(10,10,12,.14);
+  --ring2: rgba(10,10,12,.22);
+
+  --shadow-sm: 0 10px 26px rgba(0,0,0,.08);
+  --shadow-md: 0 18px 44px rgba(0,0,0,.10);
+  --shadow-lg: 0 28px 70px rgba(0,0,0,.10);
+  --shadow-xl: 0 40px 110px rgba(0,0,0,.12);
+}
+
+/* buttons look correct on white */
+.btn{
+  color: var(--ink) !important;
+  border-color: var(--ring) !important;
+  background: var(--glass) !important;
+}
+
+.btn.primary{
+  background: #0b0b0c !important;
+  color: #ffffff !important;
+  border-color: rgba(0,0,0,.12) !important;
+}
