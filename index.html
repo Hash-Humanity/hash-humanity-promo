@@ -272,7 +272,7 @@
       z-index:0;
     }
 
-    /* ✅ BLACK PHONE BODY (you asked for this) */
+    /* ✅ BLACK PHONE BODY */
     .device{
       width: min(520px, 92%);
       aspect-ratio: 9/19;
@@ -512,7 +512,7 @@
       </div>
 
       <nav class="actions" aria-label="Primary">
-        <a class="btn primary" href="https://hashhumanity.world" target="_blank" rel="noopener">Open App</a>
+        <!-- ✅ Open App removed -->
         <a class="btn" href="mission.html">Learn More</a>
         <a class="btn" href="mailto:support@hashhumanity.world">Contact</a>
       </nav>
@@ -540,7 +540,7 @@
 
         <div class="actions">
           <a class="btn primary" href="https://hashhumanity.world" target="_blank" rel="noopener">Launch Now</a>
-          <a class="btn" href="mission.html">Why Verify?</a>
+          <!-- ✅ Why Verify removed -->
         </div>
       </div>
 
@@ -626,6 +626,9 @@
       a.muted = false;
       a.preload = "auto";
 
+      // ✅ Only play ONCE per page view (no replays after ended)
+      let hasPlayedThisView = false;
+
       function showGate(msg) {
         gate.style.display = "flex";
         toggle.style.display = "none";
@@ -639,38 +642,64 @@
         toggle.textContent = a.paused ? "Audio: Off" : "Audio: On";
       }
 
-      async function tryAutoplay() {
+      async function tryAutoplayOnce() {
+        if (hasPlayedThisView) {
+          // Audio already played (or attempted) for this view; don't retrigger.
+          showToggle();
+          return;
+        }
         try {
+          hasPlayedThisView = true; // lock it in for this view
           await a.play();
           hideGate();
           showToggle();
         } catch {
+          // Autoplay blocked; allow ONE manual gesture to start it.
+          hasPlayedThisView = false; // user hasn't actually heard it yet
           showGate("Tap to enable audio");
         }
       }
 
-      async function playFromGesture() {
+      async function playFromGestureOnce() {
+        if (hasPlayedThisView) {
+          // Already played once; do not replay.
+          showToggle();
+          return;
+        }
         try {
           a.load();
+          hasPlayedThisView = true;
           await a.play();
           hideGate();
           showToggle();
         } catch (e) {
           console.error("Audio play failed:", e);
+          hasPlayedThisView = false;
           showGate("Tap to enable audio");
         }
       }
 
-      startBtn.addEventListener("click", playFromGesture, { passive: true });
-      startBtn.addEventListener("touchstart", playFromGesture, { passive: true });
+      startBtn.addEventListener("click", playFromGestureOnce, { passive: true });
+      startBtn.addEventListener("touchstart", playFromGestureOnce, { passive: true });
 
       toggle.addEventListener("click", async () => {
+        // Toggle should NOT restart audio once it's ended/played.
         if (a.paused) {
-          await playFromGesture();
+          // If it already played once, keep it off.
+          if (hasPlayedThisView) {
+            showToggle();
+            return;
+          }
+          await playFromGestureOnce();
         } else {
           a.pause();
           showToggle();
         }
+      });
+
+      // When it ends, keep it ended (no replay), update UI.
+      a.addEventListener("ended", () => {
+        showToggle();
       });
 
       a.addEventListener("error", () => {
@@ -679,7 +708,7 @@
       });
 
       window.addEventListener("load", () => {
-        setTimeout(tryAutoplay, 80);
+        setTimeout(tryAutoplayOnce, 80);
       });
     })();
   </script>
