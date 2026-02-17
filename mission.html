@@ -8,44 +8,112 @@
 <meta name="description" content="Hash Humanity — mission, who we are, why we exist, and the bigger picture." />
 <style>
   :root{
-    --bg:#000; --ink:#fff; --muted:#bfbfbf;
-    --glass:rgba(255,255,255,0.06);
-    --glass-strong:rgba(255,255,255,0.12);
-    --ring:rgba(255,255,255,0.25);
+    /* ✅ LIGHT PAGE */
+    color-scheme: light;
+
+    --bg:#ffffff;
+    --bg2:#f6f7f9;
+
+    --ink:#0b0b0b;
+    --muted:rgba(11,11,11,.70);
+
+    /* frosted glass on white */
+    --glass:rgba(255,255,255,0.72);
+    --glass-strong:rgba(255,255,255,0.84);
+
+    --ring:rgba(0,0,0,0.14);
     --radius:18px;
-    --shadow:0 20px 60px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.06);
+
+    --shadow:0 18px 70px rgba(0,0,0,.12), inset 0 0 0 1px rgba(255,255,255,.45);
+    --shadow-strong:0 26px 90px rgba(0,0,0,.18), inset 0 0 0 1px rgba(255,255,255,.50);
   }
+
   *{box-sizing:border-box}
+
   body{
-    margin:0; background: radial-gradient(900px 540px at 50% -10%, #222 0%, #0d0d0d 35%, #000 70%) #000;
-    color:var(--ink); font:16px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial;
-    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    margin:0;
+    background:
+      radial-gradient(900px 540px at 50% -10%, rgba(0,0,0,.05) 0%, rgba(0,0,0,.02) 35%, rgba(255,255,255,0) 70%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg2) 55%, #ffffff 100%);
+    color:var(--ink);
+    font:16px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
   }
+
   .wrap{max-width:980px; margin:0 auto; padding:28px 20px 80px}
+
   header{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:10px 0 18px}
+
   .brand{display:flex; align-items:center; gap:14px}
-  .brand img{width:60px; height:60px; border-radius:999px; object-fit:cover}
-  .brand strong{letter-spacing:.10em; font-weight:800; font-size: clamp(18px, 3vw, 30px)}
-  .actions{display:flex; gap:10px; flex-wrap:wrap}
-  .btn{
-    appearance:none; border:1px solid var(--ring); color:#fff; background:var(--glass);
-    padding:10px 16px; border-radius:999px; font-weight:600; letter-spacing:.02em;
-    backdrop-filter: blur(8px) saturate(120%); box-shadow:var(--shadow);
-    text-decoration:none; display:inline-flex; align-items:center; gap:10px; cursor:pointer;
+  .brand img{
+    width:60px; height:60px; border-radius:999px; object-fit:cover;
+    background:#fff;
+    border:1px solid rgba(0,0,0,.10);
+    box-shadow:0 10px 26px rgba(0,0,0,.14);
   }
-  .btn.primary{ background:#fff; color:#000; border-color:#fff }
+  .brand strong{letter-spacing:.10em; font-weight:900; font-size: clamp(18px, 3vw, 30px)}
+
+  .actions{display:flex; gap:10px; flex-wrap:wrap}
+
+  .btn{
+    appearance:none;
+    border:1px solid var(--ring);
+    color:var(--ink);
+    background:var(--glass);
+    padding:10px 16px;
+    border-radius:999px;
+    font-weight:800;
+    letter-spacing:.02em;
+    backdrop-filter: blur(10px) saturate(140%);
+    box-shadow:var(--shadow);
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    cursor:pointer;
+  }
+  .btn:hover{ background:var(--glass-strong); box-shadow:var(--shadow-strong); }
+
+  /* Primary on white page = black pill */
+  .btn.primary{
+    background:#0b0b0b;
+    color:#fff;
+    border-color:#0b0b0b;
+    box-shadow:0 22px 76px rgba(0,0,0,.18);
+  }
+
   h1{font-size: clamp(32px, 5vw, 60px); line-height:1.05; margin:6px 0 10px}
   .lead{color:var(--muted); font-size:18px; margin:0 0 28px}
 
   .grid{display:grid; grid-template-columns:1fr; gap:16px}
+
   .card{
-    background:var(--glass); border:1px solid var(--ring); border-radius:var(--radius);
-    padding:22px; box-shadow:var(--shadow);
+    background:var(--glass);
+    border:1px solid var(--ring);
+    border-radius:var(--radius);
+    padding:22px;
+    box-shadow:var(--shadow);
+    backdrop-filter: blur(14px) saturate(150%);
+    position:relative;
+    overflow:hidden;
   }
-  .card h2{margin:0 0 10px; font-size:22px}
-  .card p{margin:0 0 8px; color:#d6d6d6}
+  .card::after{
+    content:"";
+    position:absolute;
+    inset:-1px;
+    border-radius:inherit;
+    pointer-events:none;
+    background: radial-gradient(560px 220px at 20% 0%, rgba(0,0,0,.05), rgba(255,255,255,0) 55%);
+    opacity:.85;
+  }
+
+  .card h2{margin:0 0 10px; font-size:22px; position:relative; z-index:1}
+  .card p{margin:0 0 8px; color:rgba(11,11,11,.78); position:relative; z-index:1}
+
   .muted{color:var(--muted)}
-  footer{opacity:.7; font-size:13px; padding:22px 0 40px}
+
+  footer{opacity:.75; font-size:13px; padding:22px 0 40px; color:rgba(11,11,11,.56)}
 </style>
 </head>
 <body>
@@ -116,16 +184,16 @@
   }
   async function goBack(){
     const candidates = [
-      "index.html",     // same folder
-      "./index.html",   // explicit relative
-      "../index.html",  // one level up (if this ended up in /pages/)
-      "/index.html",    // site root
-      "promo.html"      // fallback if your entry file is named promo.html
+      "index.html",
+      "./index.html",
+      "../index.html",
+      "/index.html",
+      "promo.html"
     ];
     for (const url of candidates){
       if (await probe(url)) { location.href = url; return; }
     }
-    history.back(); // last resort
+    history.back();
   }
 </script>
 </body>
