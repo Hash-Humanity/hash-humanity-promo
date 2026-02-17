@@ -15,7 +15,7 @@
 
   <style>
     :root{
-      /* ✅ LIGHT MODE */
+      /* ✅ LIGHT PAGE */
       color-scheme: light;
 
       --bg0:#ffffff;
@@ -24,7 +24,6 @@
       --muted:rgba(11,11,11,.72);
       --muted2:rgba(11,11,11,.56);
 
-      /* Frosted glass on white */
       --glass: rgba(255,255,255,0.72);
       --glass2: rgba(255,255,255,0.84);
       --stroke: rgba(0,0,0,0.12);
@@ -33,7 +32,6 @@
       --radius: 22px;
       --radius2: 28px;
 
-      /* Softer shadows for light background */
       --shadow: 0 18px 70px rgba(0,0,0,.12);
       --shadow2: 0 26px 90px rgba(0,0,0,.18);
 
@@ -127,8 +125,7 @@
       font-size: clamp(22px, 2.4vw, var(--brandMax));
       line-height: 1.02;
       white-space: nowrap;
-      text-shadow:
-        0 0 18px rgba(0,0,0,.06);
+      text-shadow: 0 0 18px rgba(0,0,0,.06);
     }
 
     .actions{
@@ -178,7 +175,7 @@
       box-shadow: var(--shadow2), var(--focus);
     }
 
-    /* Primary becomes BLACK pill on WHITE page (clean + high contrast) */
+    /* Primary: black pill on white page */
     .btn.primary{
       background: #0b0b0b;
       color: #ffffff;
@@ -274,22 +271,28 @@
       pointer-events:none;
       z-index:0;
     }
+
+    /* ✅ BLACK PHONE BODY (you asked for this) */
     .device{
       width: min(520px, 92%);
       aspect-ratio: 9/19;
       position:relative;
       border-radius: 42px;
       padding: 14px;
-      background: linear-gradient(145deg, rgba(255,255,255,.85), rgba(255,255,255,.45));
-      border: 1px solid rgba(0,0,0,.12);
+
+      background: linear-gradient(145deg, #1a1a1a, #070707);
+      border: 1px solid rgba(255,255,255,.14);
+
       box-shadow:
-        0 44px 140px rgba(0,0,0,.20),
-        inset 0 2px 0 rgba(255,255,255,.50),
-        inset 0 0 0 1px rgba(255,255,255,.45);
+        0 44px 140px rgba(0,0,0,.26),
+        inset 0 2px 0 rgba(255,255,255,.06),
+        inset 0 0 0 1px rgba(255,255,255,.05);
+
       transform: perspective(1100px) rotateY(-12deg) rotateX(4deg) translateY(6px);
       transform-origin: 60% 40%;
       z-index:1;
     }
+
     .screen{
       width:100%;
       height:100%;
@@ -297,12 +300,13 @@
       overflow:hidden;
       position:relative;
       box-shadow:
-        inset 0 0 0 1px rgba(0,0,0,.10),
-        inset 0 24px 70px rgba(0,0,0,.04);
+        inset 0 0 0 1px rgba(255,255,255,.08),
+        inset 0 24px 70px rgba(0,0,0,.35);
+
       background:
         url("app-preview.png?v=3") center/cover no-repeat,
-        radial-gradient(180px 240px at 70% 8%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
-        linear-gradient(180deg, rgba(255,255,255,.45), rgba(255,255,255,.18));
+        radial-gradient(180px 240px at 70% 8%, rgba(255,255,255,.10), rgba(0,0,0,0) 60%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
     }
     .screen::before{
       content:"";
@@ -313,8 +317,8 @@
       width: 120px;
       height: 14px;
       border-radius: 10px;
-      background: rgba(0,0,0,.40);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.20);
+      background: rgba(0,0,0,.80);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.10);
     }
 
     /* ====== Cards grid ====== */
@@ -641,14 +645,12 @@
           hideGate();
           showToggle();
         } catch {
-          // Expected on mobile: user gesture required
           showGate("Tap to enable audio");
         }
       }
 
       async function playFromGesture() {
         try {
-          // some iOS Safari cases need a load() before play()
           a.load();
           await a.play();
           hideGate();
@@ -659,7 +661,6 @@
         }
       }
 
-      // ✅ bind to both click and touch so taps actually trigger on mobile
       startBtn.addEventListener("click", playFromGesture, { passive: true });
       startBtn.addEventListener("touchstart", playFromGesture, { passive: true });
 
