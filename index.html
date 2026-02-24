@@ -41,6 +41,9 @@
       --brandMax: 34px;
 
       --focus: 0 0 0 3px rgba(0,0,0,.12), 0 0 0 1px rgba(0,0,0,.16) inset;
+
+      /* ✅ App preview URL injected by JS (GitHub Pages / subpath safe) */
+      --appPreview: none;
     }
 
     *{ box-sizing:border-box }
@@ -303,10 +306,12 @@
         inset 0 0 0 1px rgba(255,255,255,.08),
         inset 0 24px 70px rgba(0,0,0,.35);
 
+      /* ✅ App preview is now path-safe for subfolders / GitHub Pages / WebViews */
       background:
-        url("app-preview.png?v=3") center/cover no-repeat,
+        var(--appPreview) center/cover no-repeat,
         radial-gradient(180px 240px at 70% 8%, rgba(255,255,255,.10), rgba(0,0,0,0) 60%),
         linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      background-color: #0b0b0b; /* fallback if image missing */
     }
     .screen::before{
       content:"";
@@ -586,20 +591,19 @@
     </section>
 
     <section class="cta" aria-label="Join">
-  <img src="hashhumanity-qr.png" alt="QR to hashhumanity.world" />
-  <div class="txt">
-    <h2>Join in 10 seconds</h2>
-    <p>
-      Point your camera, open <strong>hashhumanity.world</strong>, and verify with World ID.
-      Then jump into the feed or enter <strong>Humanity Chat</strong> voice rooms.
-    </p>
-    <div class="fineprint">
-      Hash Humanity does not store biometric data. Verification is handled by World ID via World App.
-    </div>
-  </div>
-  <!-- ✅ Buttons removed -->
-</section>
-
+      <img src="hashhumanity-qr.png" alt="QR to hashhumanity.world" />
+      <div class="txt">
+        <h2>Join in 10 seconds</h2>
+        <p>
+          Point your camera, open <strong>hashhumanity.world</strong>, and verify with World ID.
+          Then jump into the feed or enter <strong>Humanity Chat</strong> voice rooms.
+        </p>
+        <div class="fineprint">
+          Hash Humanity does not store biometric data. Verification is handled by World ID via World App.
+        </div>
+      </div>
+      <!-- ✅ Buttons removed -->
+    </section>
 
     <footer class="fine">
       © <span id="y"></span> Hash Humanity — “You are the proof, not the product.”
@@ -615,9 +619,13 @@
       const startBtn = document.getElementById("audioStartBtn");
       const toggle = document.getElementById("audioToggle");
 
-      // ✅ GitHub Pages safe path
+      // ✅ GitHub Pages / subpath safe paths
       const audioUrl = new URL("./intro.m4a", window.location.href).toString();
       a.src = audioUrl;
+
+      // ✅ FIX: app-preview.png path safe (works on root, /folder/, GitHub Pages repo path, WebViews)
+      const previewUrl = new URL("./app-preview.png", window.location.href).toString();
+      document.documentElement.style.setProperty("--appPreview", `url("${previewUrl}?v=3")`);
 
       a.volume = 0.65;
       a.loop = false;
