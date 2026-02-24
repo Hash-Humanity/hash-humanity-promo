@@ -13,6 +13,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
+  <!-- ✅ GitHub Pages / subpath safe for relative assets (logo.png, app-preview.png, intro.m4a, etc.) -->
+  <base href="./" />
+
   <style>
     :root{
       /* ✅ LIGHT PAGE */
@@ -24,26 +27,32 @@
       --muted:rgba(11,11,11,.72);
       --muted2:rgba(11,11,11,.56);
 
-      --glass: rgba(255,255,255,0.72);
-      --glass2: rgba(255,255,255,0.84);
-      --stroke: rgba(0,0,0,0.12);
-      --stroke2: rgba(0,0,0,0.22);
+      /* ===== v9: premium glass + strokes ===== */
+      --glass: rgba(255,255,255,0.62);
+      --glass2: rgba(255,255,255,0.78);
+      --stroke: rgba(0,0,0,0.10);
+      --stroke2: rgba(0,0,0,0.20);
 
       --radius: 22px;
       --radius2: 28px;
 
-      --shadow: 0 18px 70px rgba(0,0,0,.12);
-      --shadow2: 0 26px 90px rgba(0,0,0,.18);
+      /* ===== v9: softer, more expensive shadows ===== */
+      --shadow: 0 16px 64px rgba(0,0,0,.10);
+      --shadow2: 0 24px 90px rgba(0,0,0,.14);
 
       --headerH: 104px;
       --wrap: 1180px;
-
       --brandMax: 34px;
 
-      --focus: 0 0 0 3px rgba(0,0,0,.12), 0 0 0 1px rgba(0,0,0,.16) inset;
+      /* ===== v9: cleaner focus ring ===== */
+      --focus: 0 0 0 3px rgba(0,0,0,.10), 0 0 0 1px rgba(0,0,0,.16) inset;
 
       /* ✅ App preview URL injected by JS (GitHub Pages / subpath safe) */
       --appPreview: none;
+
+      /* ===== v9: micro-sheen ===== */
+      --sheen: radial-gradient(900px 240px at 18% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%);
+      --sheen2: radial-gradient(720px 220px at 18% 0%, rgba(255,255,255,.38), rgba(255,255,255,0) 58%);
     }
 
     *{ box-sizing:border-box }
@@ -143,7 +152,9 @@
       appearance:none;
       border: 1px solid var(--stroke);
       color: var(--ink);
-      background: var(--glass);
+      background:
+        var(--sheen2),
+        var(--glass);
       padding: 11px 18px;
       border-radius: 999px;
       font-weight: 800;
@@ -158,16 +169,19 @@
       gap: 9px;
       min-width: 132px;
       backdrop-filter: blur(14px) saturate(140%);
-      box-shadow: var(--shadow), inset 0 0 0 1px rgba(255,255,255,.40);
-      transition: transform .14s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease, opacity .18s ease;
+      box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,.55);
+      transition: transform .14s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease, opacity .18s ease, filter .18s ease;
       user-select:none;
       -webkit-tap-highlight-color: transparent;
     }
     .btn:hover{
       transform: translateY(-1px);
-      background: var(--glass2);
+      background:
+        var(--sheen),
+        var(--glass2);
       border-color: var(--stroke2);
-      box-shadow: var(--shadow2);
+      box-shadow: var(--shadow2), inset 0 1px 0 rgba(255,255,255,.62);
+      filter: saturate(1.02);
     }
     .btn:active{
       transform: translateY(0px);
@@ -180,13 +194,13 @@
 
     /* Primary: black pill on white page */
     .btn.primary{
-      background: #0b0b0b;
+      background: linear-gradient(180deg, #101010 0%, #070707 100%);
       color: #ffffff;
-      border-color: #0b0b0b;
-      box-shadow: 0 22px 76px rgba(0,0,0,.18);
+      border-color: rgba(0,0,0,.92);
+      box-shadow: 0 22px 76px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.08);
     }
     .btn.primary:hover{
-      box-shadow: 0 30px 110px rgba(0,0,0,.22);
+      box-shadow: 0 30px 110px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.10);
     }
 
     /* ====== Layout ====== */
@@ -208,7 +222,9 @@
       padding: 4px 12px;
       border-radius: 999px;
       border: 1px solid rgba(0,0,0,.14);
-      background: rgba(255,255,255,.70);
+      background:
+        var(--sheen2),
+        rgba(255,255,255,.72);
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: .16em;
@@ -306,7 +322,7 @@
         inset 0 0 0 1px rgba(255,255,255,.08),
         inset 0 24px 70px rgba(0,0,0,.35);
 
-      /* ✅ App preview is now path-safe for subfolders / GitHub Pages / WebViews */
+      /* ✅ app-preview.png injected via --appPreview */
       background:
         var(--appPreview) center/cover no-repeat,
         radial-gradient(180px 240px at 70% 8%, rgba(255,255,255,.10), rgba(0,0,0,0) 60%),
@@ -334,7 +350,9 @@
       margin: 48px 0 40px;
     }
     .card{
-      background: var(--glass);
+      background:
+        var(--sheen),
+        var(--glass);
       border: 1px solid var(--stroke);
       border-radius: var(--radius);
       padding: 20px 20px 18px;
@@ -349,7 +367,7 @@
       inset:-1px;
       border-radius: inherit;
       pointer-events:none;
-      background: radial-gradient(600px 220px at 20% 0%, rgba(0,0,0,.05), rgba(255,255,255,0) 55%);
+      background: radial-gradient(700px 240px at 22% 0%, rgba(0,0,0,.045), rgba(255,255,255,0) 58%);
       opacity:.9;
     }
     .card h3{
@@ -373,7 +391,9 @@
       margin: 14px 0 20px;
       padding: 24px;
       border-radius: var(--radius2);
-      background: linear-gradient(140deg, rgba(255,255,255,.88), rgba(255,255,255,.52));
+      background:
+        var(--sheen),
+        linear-gradient(140deg, rgba(255,255,255,.84), rgba(255,255,255,.54));
       border: 1px solid var(--stroke);
       display:flex;
       align-items:center;
@@ -436,10 +456,12 @@
       letter-spacing:.10em;
       text-transform:uppercase;
       border:1px solid var(--stroke2);
-      background:rgba(255,255,255,0.80);
+      background:
+        var(--sheen2),
+        rgba(255,255,255,0.82);
       color:var(--ink);
       backdrop-filter: blur(16px) saturate(150%);
-      box-shadow: 0 22px 86px rgba(0,0,0,.16), inset 0 0 0 1px rgba(255,255,255,.45);
+      box-shadow: 0 22px 86px rgba(0,0,0,.14), inset 0 1px 0 rgba(255,255,255,.58);
       cursor:pointer;
       -webkit-tap-highlight-color: transparent;
     }
@@ -452,7 +474,9 @@
       z-index:9998;
       display:none;
       border:1px solid var(--stroke);
-      background:rgba(255,255,255,.72);
+      background:
+        var(--sheen2),
+        rgba(255,255,255,0.74);
       color:var(--ink);
       padding:10px 14px;
       border-radius:999px;
@@ -466,6 +490,11 @@
       -webkit-tap-highlight-color: transparent;
     }
     .audio-toggle:focus-visible{ outline:none; box-shadow: var(--shadow2), var(--focus); }
+
+    /* ===== v9: mobile polish ===== */
+    @media (hover: none){
+      .btn:hover{ transform:none; box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,.55); }
+    }
 
     /* ====== Responsive ====== */
     @media (max-width: 1100px){
@@ -517,7 +546,6 @@
       </div>
 
       <nav class="actions" aria-label="Primary">
-        <!-- ✅ Open App removed -->
         <a class="btn" href="mission.html">Learn More</a>
         <a class="btn" href="mailto:support@hashhumanity.world">Contact</a>
       </nav>
@@ -545,7 +573,6 @@
 
         <div class="actions">
           <a class="btn primary" href="https://hashhumanity.world" target="_blank" rel="noopener">Launch Now</a>
-          <!-- ✅ Why Verify removed -->
         </div>
       </div>
 
@@ -602,7 +629,6 @@
           Hash Humanity does not store biometric data. Verification is handled by World ID via World App.
         </div>
       </div>
-      <!-- ✅ Buttons removed -->
     </section>
 
     <footer class="fine">
@@ -619,14 +645,13 @@
       const startBtn = document.getElementById("audioStartBtn");
       const toggle = document.getElementById("audioToggle");
 
-      // ✅ GitHub Pages / subpath safe paths
-      const audioUrl = new URL("./intro.m4a", window.location.href).toString();
+      // ✅ GitHub Pages / subpath safe paths (base href="./" makes these stable)
+      const audioUrl = new URL("intro.m4a", document.baseURI).toString();
       a.src = audioUrl;
 
-      // ✅ FIX: app-preview.png path safe on mobile routes (use DIRECTORY base, not full href)
-      const baseDir = new URL("./", window.location.href); // directory of this HTML file
-      const previewUrl = new URL("app-preview.png", baseDir).toString();
-      document.documentElement.style.setProperty("--appPreview", `url("${previewUrl}?v=3")`);
+      // ✅ app-preview.png stable on mobile routes (base-aware)
+      const previewUrl = new URL("app-preview.png", document.baseURI).toString();
+      document.documentElement.style.setProperty("--appPreview", `url("${previewUrl}?v=9")`);
 
       a.volume = 0.65;
       a.loop = false;
@@ -651,25 +676,22 @@
 
       async function tryAutoplayOnce() {
         if (hasPlayedThisView) {
-          // Audio already played (or attempted) for this view; don't retrigger.
           showToggle();
           return;
         }
         try {
-          hasPlayedThisView = true; // lock it in for this view
+          hasPlayedThisView = true;
           await a.play();
           hideGate();
           showToggle();
         } catch {
-          // Autoplay blocked; allow ONE manual gesture to start it.
-          hasPlayedThisView = false; // user hasn't actually heard it yet
+          hasPlayedThisView = false;
           showGate("Tap to enable audio");
         }
       }
 
       async function playFromGestureOnce() {
         if (hasPlayedThisView) {
-          // Already played once; do not replay.
           showToggle();
           return;
         }
@@ -690,9 +712,7 @@
       startBtn.addEventListener("touchstart", playFromGestureOnce, { passive: true });
 
       toggle.addEventListener("click", async () => {
-        // Toggle should NOT restart audio once it's ended/played.
         if (a.paused) {
-          // If it already played once, keep it off.
           if (hasPlayedThisView) {
             showToggle();
             return;
@@ -704,7 +724,6 @@
         }
       });
 
-      // When it ends, keep it ended (no replay), update UI.
       a.addEventListener("ended", () => {
         showToggle();
       });
