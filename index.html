@@ -452,7 +452,7 @@
       z-index:9998;
       display:none;
       border:1px solid var(--stroke);
-      background:rgba(255,255,255,0.72);
+      background:rgba(255,255,255,.72);
       color:var(--ink);
       padding:10px 14px;
       border-radius:999px;
@@ -623,8 +623,9 @@
       const audioUrl = new URL("./intro.m4a", window.location.href).toString();
       a.src = audioUrl;
 
-      // ✅ FIX: app-preview.png path safe (works on root, /folder/, GitHub Pages repo path, WebViews)
-      const previewUrl = new URL("./app-preview.png", window.location.href).toString();
+      // ✅ FIX: app-preview.png path safe on mobile routes (use DIRECTORY base, not full href)
+      const baseDir = new URL("./", window.location.href); // directory of this HTML file
+      const previewUrl = new URL("app-preview.png", baseDir).toString();
       document.documentElement.style.setProperty("--appPreview", `url("${previewUrl}?v=3")`);
 
       a.volume = 0.65;
